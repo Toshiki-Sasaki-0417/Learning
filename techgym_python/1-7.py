@@ -1,4 +1,4 @@
-#1-6
+#1-7
 
 #インポート
 import random
@@ -28,6 +28,7 @@ def get_my_hand():
 
 def get_you_hand():  
     return random.randint(0,2)
+    #return 0
 
 def get_hand_name(hand_number):
     if hand_number == 0:
@@ -52,13 +53,23 @@ def get_result(hand_diff):
 def view_result(result):  
     print(results[result])
 
+def play():
+    my_hand = get_my_hand()
+    you_hand = get_you_hand()
+    hand_diff = my_hand - you_hand
+
+    view_hand(my_hand,you_hand)
+    result = get_result(hand_diff)
+    view_result(result)
+
+    if result == 'draw':
+        play()
 
 
 #じゃんけん処理
-my_hand = get_my_hand()
-you_hand = get_you_hand()
-hand_diff = my_hand - you_hand
+start_message()
+play()
 
-view_hand(my_hand,you_hand)
-result = get_result(hand_diff)
-view_result(result)
+
+
+
