@@ -1,7 +1,10 @@
-#1-4
+#1-6
 
 #インポート
 import random
+
+#リスト定義
+hands = ['グー','チョキ','パー']
 
 #関数定義
 def start_message():
@@ -9,7 +12,18 @@ def start_message():
 
 def get_my_hand():  
     print('自分の手を入力してください')
-    return int(input('0:グー, 1:チョキ, 2:パー'))
+
+    #変数初期化
+    input_message = ''
+    idx = 0
+    
+    for i in hands:
+        input_message += str(idx) + ':' + i
+        if idx < 2:
+            input_message += ','
+        idx += 1
+
+    return int(input(input_message))
 
 def get_you_hand():  
     return random.randint(0,2)
