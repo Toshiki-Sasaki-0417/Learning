@@ -1,5 +1,5 @@
 #**************************************************************************
-#2-8
+#2-9
 #**************************************************************************
 
 #==========================================================================
@@ -8,6 +8,7 @@
 
 import random
 import sys
+import math
 #endregion
 
 #==========================================================================
@@ -25,13 +26,15 @@ message_09 = 'デバッグ:input_number = '
 message_10 = 'デバッグ:mistake_number = '
 message_11 = '正解！'
 message_12 = '不正解！'
+message_13 = '正解は '
 
 #endregion
 
 #==========================================================================
 #region 変数、リスト、辞書定義
 #==========================================================================
-data = [['見','貝'],['土','士'],['眠','眼']]
+data01 = [['見','貝'],['土','士'],['眠','眼']]
+data02 = ['A','B','C']
 level = '1'
 dic01 = {0:'１｜',1:'２｜',2:'３｜'}
 dic02 = {'A':[0,3,6],'B':[1,4,7],'C':[2,5,8]}
@@ -61,7 +64,7 @@ def section_message():
 #クイズ出力
 #=====================================
 def view_question():
-    question_word = data[int_randam]
+    question_word = data01[int_randam]
     print(question_word)
     print(message_05)
     print(message_06)
@@ -89,7 +92,7 @@ def view_question():
         j = 0
 
 #=====================================
-#入力文字列変換
+#入力文字列変換(str to int)
 #=====================================
 def change_input_nuimber(input_str):
     
@@ -106,6 +109,14 @@ def change_input_nuimber(input_str):
         num_list = dic02[strABC]
         return num_list[int123 -1]
 
+#=====================================
+#入力文字列変換(int to str)
+#=====================================
+def change_string(number):
+    
+    strABC = data02[number % 3]
+    int123 = math.floor(number/3) + 1
+    return strABC + str(int123) 
 
 #=====================================
 #正誤判定
@@ -119,11 +130,13 @@ def is_correct_number(mistake_number,input_number):
 #=====================================
 #正誤発表
 #=====================================
-def view_result(is_currect):
+def view_result(is_currect,mistake_numbe):
     if is_currect == True:
         print(message_11)
     else:
         print(message_12)
+        answer = change_string(mistake_number)
+        print(message_13 + answer)
 
 #=====================================
 #クイズゲーム
@@ -136,8 +149,8 @@ def play():
     print(message_04 + choice)
     print(message_09 + str(input_number))
     is_currect = is_correct_number(mistake_number,input_number)
-    view_result(is_currect)
-
+    view_result(is_currect,mistake_number)
+    
 #=====================================
 #エラーハンドリング（仮）
 #=====================================
