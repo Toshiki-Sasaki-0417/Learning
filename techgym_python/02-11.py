@@ -18,9 +18,9 @@ import math
 data01 = [['見','貝'],['土','士'],['眠','眼']]
 data02 = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 data03 = ['Ａ','Ｂ','Ｃ','Ｄ','Ｅ','Ｆ','Ｇ','Ｈ','Ｉ','Ｊ','Ｋ','Ｌ','Ｍ','Ｎ','Ｏ','Ｐ','Ｑ','Ｒ','Ｓ','Ｔ','Ｕ','Ｖ','Ｗ','Ｘ','Ｙ','Ｚ','']
-level = '1'
-row = 4
-col = 24
+level = '10'
+row = 8
+col = 26
 dic01 = {0:'１｜',1:'２｜',2:'３｜',3:'４｜',4:'５｜',5:'６｜',6:'７｜',7:'８｜'}
 dic02 = {}
 for i in range(col):
@@ -32,7 +32,11 @@ for i in range(col):
             else:
                 numbers.append(j * col)
         else:
-            numbers.append((j + i ) * col - (row * i))
+            if j == 1:
+                num3_1 = []
+                num3_1 = dic02[data02[i-1]]
+                for k in range(len(num3_1)):
+                    numbers.append(num3_1[k] + 1)
     dic02[data02[i]] = numbers
 
 int_randam = random.randint(0,2)
