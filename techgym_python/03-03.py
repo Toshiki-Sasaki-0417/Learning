@@ -1,5 +1,5 @@
 #**************************************************************************
-#03-02
+#03-03
 #**************************************************************************
 
 import random
@@ -14,14 +14,21 @@ teams = []
 #クラス定義
 #=====================================
 class Team:
-  def __init__(self, name, attack, defence):
-    self.name = name
-    self.attack = attack
-    self.defence = defence
+
+    def __init__(self, name, attack, defence):
+        self.name = name
+        self.attack = attack
+        self.defence = defence
+
+    #チーム定義情報表示
+    def info(self):
+        print(self.name + ': 攻撃力:' + str(self.attack) + ' / 守備力:' + str(self.defence))
 
 #=====================================
 #関数定義
 #=====================================
+
+#チーム定義
 def create_teams():
     team01 = Team('アタッカーズ', 80, 20)
     team02 = Team('ディフェンダーズ', 30, 70)
@@ -29,11 +36,12 @@ def create_teams():
     teams.append(team01)
     teams.append(team02)
     teams.append(team03)
+    team01.info()
 
-
-
+#開始
 def play():
   print('デバッグログ：play()')
   create_teams()
+  
 
 play()
