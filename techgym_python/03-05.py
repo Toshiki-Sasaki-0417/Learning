@@ -10,6 +10,8 @@ import random
 global teams
 teams = []
 
+playing_teams = {1:'アタッカーズ',2:'ディフェンダーズ',3:'アベレージーズ'}
+
 #=====================================
 #クラス定義
 #=====================================
@@ -42,10 +44,20 @@ def create_teams():
         team.info()
         idx += 1
 
+#
+def choice_team(who):
+    who_team = ''
+    if who == 'myself':
+        who_team = '自分'
+    else:
+        who_team = '相手'
+    team_number = int(input(who_team + 'のチームを選択してください（1~3）'))
+    print(who_team + 'のチームは「' + playing_teams[team_number] + '」です')
+
 #開始
 def play():
-  print('デバッグログ：play()')
   create_teams()
-  
+  choice_team('myself')
+  choice_team('enemy')
 
 play()
