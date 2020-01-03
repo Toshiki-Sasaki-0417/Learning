@@ -1,5 +1,5 @@
 #**************************************************************************
-#06-06
+#06-10
 #**************************************************************************
 
 #=====================================
@@ -10,6 +10,8 @@ import cv2 as cv
 import os
 import matplotlib.pyplot as plt
 import numpy as np
+import random
+import sys
 
 #=====================================
 #変数宣言
@@ -27,6 +29,7 @@ class Card:
         self.display_name = display_name
         self.number = number
         self.image = image
+        self.deal = False
 
 class Player:
     def __init__(self,name):
@@ -75,21 +78,44 @@ def create_cards():
         for j in range(13):
             cards.append( Card(mark,display_names[j],numbers[j],card_images[i * len(numbers) + j] ))
 
-def show_card(a_card):
-    print(a_card.mark + a_card.display_name)
-    plt.subplot(1,6,1)
-    plt.axis("off")
-    plt.imshow(a_card.image)
+def show_cards(a_cards):
+    for i,card in enumerate(a_cards):
+        print(card.mark + card.display_name)
+        plt.subplot(1,6,i+1)
+        plt.axis("off")
+        plt.imshow(card.image)
     plt.show()
+
+def deal_card(a_player):
+    deal_cards = list(filter(lambda n: n.deal == False, cards))
+    if len(deal_cards) == 0:
+        print('カードないです。')
+        sys.exit(1)
+
+    deal_card = random.choice(deal_cards)
+    deal_card.deal = True
+
+    a_player.cards.append(deal_card)
+    a_player.total_number += deal_card.number
+
+def win():
+    print('勝ち')
 
 def play():
     print('デバッグログ：play()')
     load_image()
     create_cards()
-    #show_card(cards[2])
     players.append(Human())
     players.append(Computer())
+    
+    for i in players:
+        deal_card(i)
+    deal_card(players[0])
+    show_cards(players[0].cards)
 
+    if players[0].total_number == 21:
+        win()
+    
 #=====================================
 #実行
 #=====================================

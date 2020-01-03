@@ -49,8 +49,8 @@ def load_image():
     vsplit_number = 4
     hsplit_number = 13
   
-    if not os.path.isfile(image_name):
-        response = requests.get('http://3156.bz/techgym/cards.jpg', allow_redirects=False)
+    #if not os.path.isfile(image_name):
+    response = requests.get('http://3156.bz/techgym/cards.jpg', allow_redirects=False)
     with open(image_name, 'wb') as image:
         image.write(response.content)
    
@@ -85,6 +85,7 @@ def play():
     print('デバッグログ：play()')
     load_image()
     create_cards()
+    #show_card(cards[2])
 
 #=====================================
 #実行
